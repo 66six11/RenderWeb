@@ -17,6 +17,11 @@ export const motionPresets = {
   }
 } as const;
 
+export type MotionPresetName = keyof typeof motionPresets;
+
 export function getMotionPreset(name?: string) {
-  return motionPresets[name ?? "slow-orbit"] ?? motionPresets["slow-orbit"];
+  const fallback: MotionPresetName = "slow-orbit";
+  const key = name && name in motionPresets ? (name as MotionPresetName) : fallback;
+
+  return motionPresets[key];
 }

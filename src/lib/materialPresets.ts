@@ -50,10 +50,15 @@ export const materialPresets = {
   }
 } satisfies Record<string, MaterialPreset>;
 
+export type MaterialPresetName = keyof typeof materialPresets;
+
 export function getMaterialPreset(name?: string): MaterialPreset {
-  return materialPresets[name ?? "clay"] ?? materialPresets.clay;
+  const fallback: MaterialPresetName = "clay";
+  const key = name && name in materialPresets ? (name as MaterialPresetName) : fallback;
+
+  return materialPresets[key];
 }
 
-export function getMaterialNames(): string[] {
-  return Object.keys(materialPresets);
+export function getMaterialNames(): MaterialPresetName[] {
+  return Object.keys(materialPresets) as MaterialPresetName[];
 }

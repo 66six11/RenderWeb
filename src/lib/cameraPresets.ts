@@ -34,6 +34,11 @@ export const cameraPresets = {
   }
 } satisfies Record<string, CameraPreset>;
 
+export type CameraPresetName = keyof typeof cameraPresets;
+
 export function getCameraPreset(name?: string): CameraPreset {
-  return cameraPresets[name ?? "three-quarter"] ?? cameraPresets["three-quarter"];
+  const fallback: CameraPresetName = "three-quarter";
+  const key = name && name in cameraPresets ? (name as CameraPresetName) : fallback;
+
+  return cameraPresets[key];
 }
