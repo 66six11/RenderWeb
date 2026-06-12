@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import "../styles/global.css";
+
+const posts = (await getCollection("posts"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RenderWeb</title>
+    <meta name="description" content="A text-driven 3D rendering blog built with Astro, React Three Fiber, and Anime.js." />
+  </head>
+  <body>
+    <main class="home-shell">
+      <section class="home-hero">
+        <p class="eyebrow">Text-driven 3D rendering notes</p>
+        <h1>RenderWeb</h1>
+        <p>
+          A rendering blog where MDX frontmatter drives Three.js scenes, camera states,
+          material presets, and Anime.js page motion.
+        </p>
+      </section>
+
+      <section class="post-list" aria-label="Posts">
+        {posts.map((post) => (
+          <a class="post-card" href={`/blog/${post.id}/`}>
+            <span>{post.data.date.toISOString().slice(0, 10)}</span>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+            <div class="tag-row">
+              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+          </a>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>

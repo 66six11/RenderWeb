@@ -1,0 +1,51 @@
+---
+title: "Shader lab notes"
+description: "A procedural shader scene driven by a small render schema and scroll timeline."
+date: 2026-06-12
+tags: ["shader", "webgl", "r3f", "animejs"]
+render:
+  hero:
+    id: "shader"
+    preset: "shader-lab"
+    camera: "three-quarter"
+    motion: "soft-float"
+    quality: "medium"
+    poster: "/posters/shader-lab.svg"
+  timeline:
+    - id: "shader-intro"
+      trigger: "#shader-intro"
+      dom:
+        target: "#shader-intro h2"
+        effect: "fade-up"
+      scene:
+        sceneId: "shader"
+        camera: "front"
+        progress: 0.2
+    - id: "shader-mix"
+      trigger: "#shader-mix"
+      dom:
+        target: "#shader-mix .parameter-card"
+        effect: "scale-in"
+      scene:
+        sceneId: "shader"
+        camera: "macro"
+        progress: 0.9
+---
+
+<section id="shader-intro">
+
+## Shader as a reusable preset
+
+The `shader-lab` scene uses a small custom shader material. It is not tied to this article. A future post can reuse the same scene while changing only the schema data.
+
+</section>
+
+<section id="shader-mix">
+
+## Scroll-controlled uniforms
+
+<div class="parameter-card">
+  The timeline step publishes a `progress` value. The scene receives it through `renderBus` and uses it to mix shader colors.
+</div>
+
+</section>

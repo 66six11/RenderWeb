@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Glass material study poster">
+  <defs>
+    <radialGradient id="a" cx="30%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#67f7e7" stop-opacity="0.45"/>
+      <stop offset="0.55" stop-color="#121a31" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#070912"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#a)"/>
+  <circle cx="800" cy="450" r="220" fill="none" stroke="#d9f3ff" stroke-width="3" opacity="0.7"/>
+  <circle cx="725" cy="370" r="80" fill="#d9f3ff" opacity="0.16"/>
+  <text x="96" y="790" fill="#f5f7fb" font-family="Inter, system-ui" font-size="64" font-weight="700">Glass material study</text>
+</svg>

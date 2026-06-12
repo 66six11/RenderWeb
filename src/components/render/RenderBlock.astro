@@ -1,0 +1,18 @@
+---
+import RenderScene from "./RenderScene";
+import type { RenderSceneConfig } from "../../types/render";
+
+interface Props {
+  config: RenderSceneConfig;
+  class?: string;
+}
+
+const { config, class: className = "" } = Astro.props;
+const height = config.height ?? "clamp(360px, 62vh, 720px)";
+const poster = config.poster;
+---
+
+<section class={`render-block ${className}`} style={`--render-height: ${height};`} data-preset={config.preset}>
+  {poster && <img class="render-poster" src={poster} alt="" loading="lazy" />}
+  <RenderScene config={config} client:visible />
+</section>

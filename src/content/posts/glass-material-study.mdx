@@ -1,0 +1,81 @@
+---
+title: "Glass material study"
+description: "A first RenderWeb post that uses frontmatter to drive a PBR glass scene, camera transitions, and DOM reveals."
+date: 2026-06-12
+tags: ["pbr", "glass", "threejs", "render-schema"]
+render:
+  hero:
+    id: "hero"
+    preset: "pbr-turntable"
+    material: "clear-glass"
+    camera: "three-quarter"
+    motion: "slow-orbit"
+    quality: "medium"
+    poster: "/posters/glass-material-study.svg"
+  timeline:
+    - id: "intro"
+      trigger: "#intro"
+      dom:
+        target: "#intro h2"
+        effect: "fade-up"
+      scene:
+        sceneId: "hero"
+        camera: "front"
+        material: "clear-glass"
+    - id: "roughness"
+      trigger: "#roughness"
+      dom:
+        target: "#roughness .parameter-card"
+        effect: "fade-up-stagger"
+        stagger: 90
+      scene:
+        sceneId: "hero"
+        camera: "macro"
+        material: "brushed-metal"
+    - id: "compare"
+      trigger: "#compare"
+      dom:
+        target: "#compare h2"
+        effect: "split-reveal"
+      scene:
+        sceneId: "hero"
+        camera: "side"
+        material: "obsidian"
+---
+
+<section id="intro">
+
+## Render data as the scene controller
+
+This article is written as MDX, but the 3D scene above is selected from frontmatter. The post declares a `pbr-turntable` preset, a material, a camera preset, and motion behavior. The page then mounts a React Three Fiber canvas only when the scene block becomes visible.
+
+</section>
+
+<section id="roughness">
+
+## Material parameter notes
+
+<div class="parameter-card">
+  <strong>Roughness</strong><br />
+  Lower roughness produces sharper highlights. The timeline switches the scene into a macro camera state for closer inspection.
+</div>
+
+<div class="parameter-card">
+  <strong>Transmission</strong><br />
+  Glass-like materials should keep roughness low and use environment lighting for stronger silhouettes.
+</div>
+
+<div class="parameter-card">
+  <strong>Fallback shape</strong><br />
+  If no GLB asset is provided, the scene renders a procedural icosahedron so the article remains interactive.
+</div>
+
+</section>
+
+<section id="compare">
+
+## Next comparison
+
+The next scene preset can compare several material balls in one stage. The authoring experience should stay the same: define data first, then let the renderer decide how to present it.
+
+</section>

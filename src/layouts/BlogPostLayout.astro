@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import RenderBlock from "../components/render/RenderBlock.astro";
+import ArticleMotion from "../components/motion/ArticleMotion.astro";
+import "../styles/global.css";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags, render } = post.data;
+const formattedDate = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+}).format(date);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | RenderWeb</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <main class="post-shell">
+      <header class="post-header">
+        <a class="site-link" href="/">RenderWeb</a>
+        <p class="post-date">{formattedDate}</p>
+        <h1>{title}</h1>
+        <p class="post-description">{description}</p>
+        <div class="tag-row">
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      </header>
+
+      {render?.hero && <RenderBlock config={render.hero} class="hero-render" />}
+
+      <article class="post-content">
+        <slot />
+      </article>
+    </main>
+
+    <ArticleMotion timeline={render?.timeline ?? []} />
+  </body>
+</html>

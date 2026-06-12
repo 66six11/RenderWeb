@@ -1,0 +1,16 @@
+---
+import type { RenderTimelineStep } from "../../types/render";
+
+interface Props {
+  timeline?: RenderTimelineStep[];
+}
+
+const { timeline = [] } = Astro.props;
+const timelineJson = JSON.stringify(timeline);
+---
+
+<script type="module" define:vars={{ timelineJson }}>
+  import { setupArticleMotion } from "/src/components/motion/articleMotion.ts";
+
+  setupArticleMotion(JSON.parse(timelineJson));
+</script>
